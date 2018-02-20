@@ -19,10 +19,12 @@ namespace SimpleDatabaseConnection
         {
             try
             {
-                string connectionString = String.Format("Server={0};Port={1};Database={2};Uid={3};Pwd={4};", adress, port, database, username, password);
-                connection = new MySqlConnection(connectionString);
+                connection = new MySql.Data.MySqlClient.MySqlConnection();
+                connection.ConnectionString = String.Format("Server={0};Port={1};Database={2};Uid={3};Pwd={4};", adress, port, database, username, password);
+                connection.Open();
                 IsConnected = true;
                 ResponseMessage = "Connection successfull";
+                connection.Close();
             }
             catch (MySqlException e)
             {
